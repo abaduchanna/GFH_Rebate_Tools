@@ -104,7 +104,7 @@ NAVY  = "#090d26"
 EMBEDDED_LOGO_B64 = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "embedded_logo_b64.txt"), "r").read().strip() if not getattr(sys, "frozen", False) else open(os.path.join(getattr(sys, "_MEIPASS", "."), "assets", "embedded_logo_b64.txt"), "r").read().strip()
 EMBEDDED_ICON_B64 = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "embedded_icon_b64.txt"), "r").read().strip() if not getattr(sys, "frozen", False) else open(os.path.join(getattr(sys, "_MEIPASS", "."), "assets", "embedded_icon_b64.txt"), "r").read().strip()
 
-RED   = "#f0541c"
+RED   = "#e83030"
 WHITE = "#ffffff"
 LIGHT = "#f6f7fb"
 LOG_BG = "#10182e"
@@ -597,7 +597,7 @@ class App:
         s.configure("Run.TButton", background=RED, foreground=WHITE,
                     font=("Segoe UI", 11, "bold"), padding=(16, 9), borderwidth=0)
         s.map("Run.TButton",
-              background=[("active", "#c01820"), ("disabled", "#aaa")])
+              background=[("active", "#c82020"), ("disabled", "#aaa")])
         s.configure("Browse.TButton", background=NAVY, foreground=WHITE,
                     font=("Segoe UI", 10), padding=(10, 6), borderwidth=0)
         s.map("Browse.TButton", background=[("active", "#1a2550")])

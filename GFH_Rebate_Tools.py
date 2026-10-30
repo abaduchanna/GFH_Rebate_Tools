@@ -58,11 +58,9 @@ def _pip_install(pkg_name):
     # instance of the app itself (window flooding).
     if getattr(sys, "frozen", False):
         return
-    subprocess.run(
-        [sys.executable, "-m", "pip", "install", pkg_name,
-         "--quiet", "--disable-pip-version-check"],
-        capture_output=True,
-    )
+    # Keep missing optional packages from blocking application startup.
+    print(f"[WARN] {pkg_name} is missing; related features may be unavailable.")
+    return
 
 # Check each dependency by its real import module name (pywin32 -> win32com,
 # pillow -> PIL), not the pip package name, so this only runs pip when a
@@ -119,7 +117,6 @@ LOG_FG = "#a8d8ff"
 
 ICON_ICO_NAME = "GFH_icon.ico"
 LOGO_PNG_NAME = "GFH_Telecom_Logo.png"
-COPYRIGHT_TEXT = f"Developed by www.3SVerse.com | Copyright © {date.today().year} | All rights reserved."
 ICON_ICO_B64 = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "icon_ico_b64.txt"), "r").read().strip() if not getattr(sys, "frozen", False) else open(os.path.join(getattr(sys, "_MEIPASS", "."), "assets", "icon_ico_b64.txt"), "r").read().strip()
 
 
@@ -590,7 +587,6 @@ class App:
         self._styles()
         self._header()
         self._body()
-        self._copyright_bar()
         apply_theme_to_window(self.root, self.theme_manager)
         self._poll()
 
@@ -861,12 +857,6 @@ class App:
             bg=LOG_BG, fg=LOG_FG, relief="flat", state="disabled", wrap="word"
         )
         self.log_box.pack(fill="both", expand=True)
-
-    def _copyright_bar(self):
-        bar = tk.Frame(self.root, bg=NAVY, height=26)
-        bar.pack(fill="x", side="bottom"); bar.pack_propagate(False)
-        tk.Label(bar, text=COPYRIGHT_TEXT, bg=NAVY, fg="#9d9db8",
-                 font=("Segoe UI", 8)).pack(pady=4)
 
     # ── helpers ────────────────────────────────────────────────────────────
     def _browse(self):

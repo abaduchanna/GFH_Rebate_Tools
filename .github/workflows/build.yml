@@ -17,6 +17,7 @@ jobs:
       matrix:
         app:
           - GFH_Rebate_Tools
+          - GFH_Rebate_Tools_Qt
 
     steps:
       - name: Checkout
